@@ -16,7 +16,18 @@ using pdouelle.GenericController.Blobs.Debug.Api.Models.Offers.Models.Queries.Ge
 namespace pdouelle.GenericController.Blobs.Debug.Api.Controllers
 {
     public class OffersController : GenericControllerWithBlobs
-        <Offer, OfferDto, MyBlob, BlobDto, GetOfferListQueryModel, GetOfferByIdQueryModel, CreateOfferCommandModel, UpdateOfferCommandModel, PatchOfferCommandModel, DeleteOfferCommandModel>
+        <
+            Offer, 
+            OfferDto, 
+            MyBlob, 
+            BlobDto, 
+            GetOfferListQueryModel, 
+            GetOfferByIdQueryModel, 
+            CreateOfferCommandModel, 
+            UpdateOfferCommandModel, 
+            PatchOfferCommandModel, 
+            DeleteOfferCommandModel
+    >
     {
         public OffersController(IMediator mediator, IBlobFactory factory, IMapper mapper)
             : base(mediator, factory, mapper)
