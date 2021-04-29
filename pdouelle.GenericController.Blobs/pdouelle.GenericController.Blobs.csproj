@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>net5.0</TargetFramework>
+        <RootNamespace>pdouelle.GenericController.Blob</RootNamespace>
+    </PropertyGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="10.1.1" />
+      <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
+      <PackageReference Include="Azure.Storage.Blobs" Version="12.8.1" />
+      <PackageReference Include="douell_p.GenericMediatR" Version="1.0.8" />
+      <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.5" />
+      <PackageReference Include="Microsoft.Identity.Web" Version="1.9.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="Factory" />
+      <Folder Include="Handlers\BlobStorage" />
+      <Folder Include="Handlers\Blobs\Commands" />
+      <Folder Include="Models\BlobsStorage\Entities" />
+    </ItemGroup>
+
+</Project>
