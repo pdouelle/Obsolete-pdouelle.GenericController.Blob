@@ -36,14 +36,14 @@ namespace pdouelle.GenericController.Blob.Controllers
         where TBlobDto : IEntityBlob
         where TPatch : class, new()
     {
-        private readonly IMediator _mediator;
+        protected readonly IMediator Mediator;
         private readonly IBlobFactory _factory;
         private readonly IMapper _mapper;
         protected string _containerName;
 
         public GenericControllerWithBlobs(IMediator mediator, IBlobFactory factory, IMapper mapper)
         {
-            _mediator = mediator;
+            Mediator = mediator;
             _factory = factory;
             _mapper = mapper;
         }
@@ -56,7 +56,7 @@ namespace pdouelle.GenericController.Blob.Controllers
         [HttpGet]
         public virtual async Task<IActionResult> GetList([FromQuery] TQueryList request)
         {
-            IEnumerable<TEntity> response = await _mediator.Send(new ListQueryModel<TEntity, TQueryList>()
+            IEnumerable<TEntity> response = await Mediator.Send(new ListQueryModel<TEntity, TQueryList>()
             {
                 Request = request
             });
@@ -64,7 +64,7 @@ namespace pdouelle.GenericController.Blob.Controllers
             IEnumerable<BlobStorage> blobs = null;
 
             if (request.IncludeBlobs)
-                blobs = await _mediator.Send(new GetBlobsListQueryModel
+                blobs = await Mediator.Send(new GetBlobsListQueryModel
                 {
                     ContainerName = _containerName,
                 });
@@ -86,7 +86,7 @@ namespace pdouelle.GenericController.Blob.Controllers
         public virtual async Task<IActionResult> GetById(Guid id, [FromQuery] TQueryById request)
         {
             request.Id = id;
-            TEntity response = await _mediator.Send(new IdQueryModel<TEntity, TQueryById>
+            TEntity response = await Mediator.Send(new IdQueryModel<TEntity, TQueryById>
             {
                 Request = request
             });
@@ -97,7 +97,7 @@ namespace pdouelle.GenericController.Blob.Controllers
             IEnumerable<BlobStorage> blobs = null;
 
             if (request.IncludeBlobs)
-                blobs = await _mediator.Send(new GetBlobsListQueryModel
+                blobs = await Mediator.Send(new GetBlobsListQueryModel
                 {
                     ContainerName = _containerName,
                     Prefix = response.Id.ToString("N")
@@ -116,12 +116,12 @@ namespace pdouelle.GenericController.Blob.Controllers
         [HttpPost]
         public virtual async Task<IActionResult> Create([FromBody] TCreate request)
         {
-            TEntity entity = await _mediator.Send(new CreateCommandModel<TEntity, TCreate>
+            TEntity entity = await Mediator.Send(new CreateCommandModel<TEntity, TCreate>
             {
                 Request = request
             });
 
-            await _mediator.Send(new SaveCommandModel<TEntity>());
+            await Mediator.Send(new SaveCommandModel<TEntity>());
 
             var mappedResponse = _mapper.Map<TDto>(entity);
 
@@ -139,7 +139,7 @@ namespace pdouelle.GenericController.Blob.Controllers
         [HttpPut("{id}")]
         public virtual async Task<IActionResult> Update(Guid id, [FromBody] TUpdate request)
         {
-            TEntity entity = await _mediator.Send(new IdQueryModel<TEntity, TQueryById>
+            TEntity entity = await Mediator.Send(new IdQueryModel<TEntity, TQueryById>
             {
                 Request = new TQueryById {Id = id}
             });
@@ -147,13 +147,13 @@ namespace pdouelle.GenericController.Blob.Controllers
             if (entity == null)
                 return NotFound();
 
-            TEntity response = await _mediator.Send(new UpdateCommandModel<TEntity, TUpdate>
+            TEntity response = await Mediator.Send(new UpdateCommandModel<TEntity, TUpdate>
             {
                 Entity = entity,
                 Request = request
             });
 
-            await _mediator.Send(new SaveCommandModel<TEntity>());
+            await Mediator.Send(new SaveCommandModel<TEntity>());
 
             var mappedResponse = _mapper.Map<TDto>(response);
 
@@ -171,7 +171,7 @@ namespace pdouelle.GenericController.Blob.Controllers
         [HttpPatch("{id}")]
         public virtual async Task<IActionResult> Patch(Guid id, [FromBody] JsonPatchDocument<TPatch> patchDocument)
         {
-            TEntity entity = await _mediator.Send(new IdQueryModel<TEntity, TQueryById>
+            TEntity entity = await Mediator.Send(new IdQueryModel<TEntity, TQueryById>
             {
                 Request = new TQueryById {Id = id}
             });
@@ -184,13 +184,13 @@ namespace pdouelle.GenericController.Blob.Controllers
 
             _mapper.Map(request, entity);
 
-            TEntity response = await _mediator.Send(new PatchCommandModel<TEntity, TPatch>
+            TEntity response = await Mediator.Send(new PatchCommandModel<TEntity, TPatch>
             {
                 Entity = entity,
                 Request = request
             });
 
-            await _mediator.Send(new SaveCommandModel<TEntity>());
+            await Mediator.Send(new SaveCommandModel<TEntity>());
 
             var mappedResponse = _mapper.Map<TDto>(response);
 
@@ -208,7 +208,7 @@ namespace pdouelle.GenericController.Blob.Controllers
         [HttpDelete("{id}")]
         public virtual async Task<IActionResult> Delete(Guid id, [FromQuery] TDelete request)
         {
-            TEntity entity = await _mediator.Send(new IdQueryModel<TEntity, TQueryById>
+            TEntity entity = await Mediator.Send(new IdQueryModel<TEntity, TQueryById>
             {
                 Request = new TQueryById {Id = id, IncludeBlobs = true}
             });
@@ -216,17 +216,17 @@ namespace pdouelle.GenericController.Blob.Controllers
             if (entity == null)
                 return NotFound();
 
-            await _mediator.Send(new DeleteCommandModel<TEntity, TDelete>
+            await Mediator.Send(new DeleteCommandModel<TEntity, TDelete>
             {
                 Entity = entity,
                 Request = request
             });
 
-            await _mediator.Send(new SaveCommandModel<TEntity>());
+            await Mediator.Send(new SaveCommandModel<TEntity>());
 
             foreach (TBlobEntity blob in entity.Blobs)
             {
-                await _mediator.Send(new DeleteBlobCommandModel
+                await Mediator.Send(new DeleteBlobCommandModel
                 {
                     ContainerName = blob.ContainerName,
                     Name = blob.Name

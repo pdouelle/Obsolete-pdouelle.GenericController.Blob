@@ -36,8 +36,6 @@ namespace pdouelle.GenericController.Blobs.Debug.Api
             var connectionStringAzureStorage = Configuration.GetConnectionString("Storage");
             services.AddAzureClients(builder => { builder.AddBlobServiceClient(connectionStringAzureStorage); });
 
-            services.AddTransient<IBlobFactory, BlobFactory>();
-
             var connectionString = Configuration.GetConnectionString("Database");
             services.AddDbContext<DatabaseService>(options => { options.UseSqlServer(connectionString); });
 
