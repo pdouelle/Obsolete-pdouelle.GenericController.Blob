@@ -37,14 +37,14 @@ namespace pdouelle.GenericController.Blob.Controllers
         where TPatch : class, new()
     {
         protected readonly IMediator Mediator;
-        private readonly IBlobFactory _factory;
+        protected readonly IBlobFactory Factory;
         private readonly IMapper _mapper;
         protected string _containerName;
 
         public GenericControllerWithBlobs(IMediator mediator, IBlobFactory factory, IMapper mapper)
         {
             Mediator = mediator;
-            _factory = factory;
+            Factory = factory;
             _mapper = mapper;
         }
 
@@ -69,7 +69,7 @@ namespace pdouelle.GenericController.Blob.Controllers
                     ContainerName = _containerName,
                 });
 
-            IEnumerable<TDto> mappedResponse = _factory.MapBlob<TEntity, TDto, TBlobDto>(response, blobs);
+            IEnumerable<TDto> mappedResponse = Factory.MapBlob<TEntity, TDto, TBlobDto>(response, blobs);
 
             return Ok(mappedResponse);
         }
@@ -103,7 +103,7 @@ namespace pdouelle.GenericController.Blob.Controllers
                     Prefix = response.Id.ToString("N")
                 });
 
-            TDto mappedResponse = _factory.MapBlob<TEntity, TDto, TBlobDto>(response, blobs);
+            TDto mappedResponse = Factory.MapBlob<TEntity, TDto, TBlobDto>(response, blobs);
 
             return Ok(mappedResponse);
         }
