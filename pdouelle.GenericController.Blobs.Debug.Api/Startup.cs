@@ -1,5 +1,4 @@
 using Autofac;
-using douell_p.GenericMediatR;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -10,8 +9,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using pdouelle.GenericController.Blob;
-using pdouelle.GenericController.Blob.Factory;
 using pdouelle.GenericController.Blobs.Debug.Api.Data;
+using pdouelle.GenericMediatR;
 
 namespace pdouelle.GenericController.Blobs.Debug.Api
 {

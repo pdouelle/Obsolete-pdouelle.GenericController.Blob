@@ -2,22 +2,22 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
-using douell_p.GenericMediatR.Models.Generics.Models.Commands.Create;
-using douell_p.GenericMediatR.Models.Generics.Models.Commands.Delete;
-using douell_p.GenericMediatR.Models.Generics.Models.Commands.Patch;
-using douell_p.GenericMediatR.Models.Generics.Models.Commands.Save;
-using douell_p.GenericMediatR.Models.Generics.Models.Commands.Update;
-using douell_p.GenericMediatR.Models.Generics.Models.Queries.IdQuery;
-using douell_p.GenericMediatR.Models.Generics.Models.Queries.ListQuery;
-using douell_p.GenericRepository;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.JsonPatch;
 using Microsoft.AspNetCore.Mvc;
+using pdouelle.Entity;
 using pdouelle.GenericController.Blob.Entities;
 using pdouelle.GenericController.Blob.Factory;
 using pdouelle.GenericController.Blob.Models.BlobsStorage.Models.Commands.DeleteBlob;
 using pdouelle.GenericController.Blob.Models.BlobsStorage.Models.Queries.GetBlobsList;
+using pdouelle.GenericMediatR.Models.Generics.Models.Commands.Create;
+using pdouelle.GenericMediatR.Models.Generics.Models.Commands.Delete;
+using pdouelle.GenericMediatR.Models.Generics.Models.Commands.Patch;
+using pdouelle.GenericMediatR.Models.Generics.Models.Commands.Save;
+using pdouelle.GenericMediatR.Models.Generics.Models.Commands.Update;
+using pdouelle.GenericMediatR.Models.Generics.Models.Queries.IdQuery;
+using pdouelle.GenericMediatR.Models.Generics.Models.Queries.ListQuery;
 
 namespace pdouelle.GenericController.Blob.Controllers
 {
@@ -181,8 +181,6 @@ namespace pdouelle.GenericController.Blob.Controllers
 
             var request = new TPatch();
             patchDocument.ApplyTo(request);
-
-            _mapper.Map(request, entity);
 
             TEntity response = await Mediator.Send(new PatchCommandModel<TEntity, TPatch>
             {

@@ -1,5 +1,5 @@
 using System;
-using douell_p.GenericRepository;
+using pdouelle.Entity;
 
 namespace pdouelle.GenericController.Blob.Handlers.Blobs.Queries.GetBlobById
 {

@@ -3,7 +3,7 @@
     <PropertyGroup>
         <TargetFramework>net5.0</TargetFramework>
         <PackageId>pdouelle.GenericController.Blob</PackageId>
-        <Version>1.0.2</Version>
+        <Version>1.0.3</Version>
         <Authors>Philippe DOUELLE</Authors>
         <Company>BETTERIT</Company>
         <RootNamespace>pdouelle.GenericController.Blob</RootNamespace>
@@ -14,9 +14,9 @@
       <PackageReference Include="AutoMapper" Version="10.1.1" />
       <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.1.1" />
       <PackageReference Include="Azure.Storage.Blobs" Version="12.8.1" />
-      <PackageReference Include="douell_p.GenericMediatR" Version="1.0.8" />
       <PackageReference Include="Microsoft.AspNetCore.JsonPatch" Version="5.0.5" />
       <PackageReference Include="Microsoft.Identity.Web" Version="1.9.1" />
+      <PackageReference Include="pdouelle.GenericMediatR" Version="1.0.0" />
     </ItemGroup>
 
     <ItemGroup>

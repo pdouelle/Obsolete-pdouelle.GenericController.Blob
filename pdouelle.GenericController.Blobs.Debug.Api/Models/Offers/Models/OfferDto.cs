@@ -1,5 +1,5 @@
 using System;
-using douell_p.GenericRepository;
+using pdouelle.Entity;
 using pdouelle.GenericController.Blobs.Debug.Api.Models.Blobs.Models;
 
 namespace pdouelle.GenericController.Blobs.Debug.Api.Models.Offers.Models

@@ -1,6 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
-using douell_p.GenericRepository;
+using pdouelle.Entity;
 using pdouelle.GenericController.Blob.Entities;
 
 namespace pdouelle.GenericController.Blob.Models.Blobs.Entities

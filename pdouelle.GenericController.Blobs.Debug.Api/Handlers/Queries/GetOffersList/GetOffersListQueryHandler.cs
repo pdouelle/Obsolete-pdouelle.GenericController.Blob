@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using douell_p.GenericMediatR.Handlers.Generics.Queries.ListQuery;
-using douell_p.GenericMediatR.Models.Generics.Models.Queries.ListQuery;
-using douell_p.GenericRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using pdouelle.GenericController.Blobs.Debug.Api.Models.Offers.Entities;
 using pdouelle.GenericController.Blobs.Debug.Api.Models.Offers.Models.Queries.GetOfferList;
+using pdouelle.GenericMediatR.Handlers.Generics.Queries.ListQuery;
+using pdouelle.GenericMediatR.Models.Generics.Models.Queries.ListQuery;
+using pdouelle.GenericRepository;
 
 namespace pdouelle.GenericController.Blobs.Debug.Api.Handlers.Queries.GetOffersList
 {

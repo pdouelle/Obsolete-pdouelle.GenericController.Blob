@@ -1,6 +1,6 @@
 using System;
 using System.Collections.Generic;
-using douell_p.GenericRepository;
+using pdouelle.Entity;
 using pdouelle.GenericController.Blob.Entities;
 
 namespace pdouelle.GenericController.Blobs.Debug.Api.Models.Blobs.Models
