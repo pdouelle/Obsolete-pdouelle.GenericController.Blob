@@ -18,7 +18,7 @@ namespace pdouelle.GenericController.Blob.Handlers.BlobStorage.Commands.DeleteBl
 
         public async Task<bool> Handle(DeleteBlobCommandModel request, CancellationToken cancellationToken)
         {
-            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(request.ContainerName);
+            BlobContainerClient containerClient = _blobServiceClient.GetBlobContainerClient(request.ContainerName.ToLower());
 
             BlobClient blobClient = containerClient.GetBlobClient(request.Name);
 
