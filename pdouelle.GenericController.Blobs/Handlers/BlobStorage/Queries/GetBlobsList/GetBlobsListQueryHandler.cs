@@ -29,7 +29,7 @@ namespace pdouelle.GenericController.Blob.Handlers.BlobStorage.Queries.GetBlobsL
             var blobsFromStorage = new List<Entities.BlobStorage>();
 
             await foreach (BlobItem blob in containerClient.GetBlobsAsync
-                (prefix: request.Prefix, cancellationToken: cancellationToken))
+                (BlobTraits.All, prefix: request.Prefix, cancellationToken: cancellationToken))
             {
                 BlobClient blobClient = containerClient.GetBlobClient(blob.Name);
 
